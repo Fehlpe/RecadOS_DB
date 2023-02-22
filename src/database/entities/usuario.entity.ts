@@ -18,10 +18,10 @@ export class UsuarioEntity extends BaseEntity {
   usuarioSenha!: string;
 
   @Column({ name: "email" })
-  usuarioEmail!: number;
+  usuarioEmail!: string;
 
   @Column({ name: "nome" })
-  usuarioNome!: number;
+  usuarioNome!: string;
 
   @CreateDateColumn({ name: "data_criacao" })
   usuarioDataCriacao!: Date;
@@ -33,6 +33,7 @@ export class UsuarioEntity extends BaseEntity {
   beforeInsert() {
     this.usuarioId = new Date().getTime().toString();
     this.usuarioDataCriacao = new Date();
+    this.usuarioDataAtualizacao = new Date();
   }
 
   @BeforeUpdate()
