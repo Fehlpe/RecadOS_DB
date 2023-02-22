@@ -14,7 +14,7 @@ pgHelper
   .connect()
   .then(() => {
     app.listen(process.env.PORT || 8080, () =>
-      console.log(`🤘 > API RODANDO NA PORTA ${process.env.PORT}`)
+      console.log(`API ok na porta => ${process.env.PORT}`)
     );
   })
   .catch((err) => console.log(err));
