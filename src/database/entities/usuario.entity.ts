@@ -1,5 +1,7 @@
 import {
   BaseEntity,
+  BeforeInsert,
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   Entity,
@@ -26,4 +28,15 @@ export class UsuarioEntity extends BaseEntity {
 
   @UpdateDateColumn({ name: "data_atualizacao" })
   usuarioDataAtualizacao?: Date;
+
+  @BeforeInsert()
+  beforeInsert() {
+    this.usuarioId = new Date().getTime().toString();
+    this.usuarioDataCriacao = new Date();
+  }
+
+  @BeforeUpdate()
+  beforeUpdate() {
+    this.usuarioDataAtualizacao = new Date();
+  }
 }
