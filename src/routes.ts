@@ -12,8 +12,8 @@ export default (app: Express) => {
   const userController = new UserController();
   app.post(
     "/users",
-    checkExistingEmail,
     checkUserFields,
+    checkExistingEmail,
     checkPasswords,
     userController.create
   );
