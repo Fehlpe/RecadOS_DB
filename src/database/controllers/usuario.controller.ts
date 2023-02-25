@@ -7,11 +7,6 @@ export class UsuarioController {
 
     const repository = new UsuarioRepository();
 
-    const emailExistente = await repository.verificarEmailExistente(email);
-    if (emailExistente) {
-      return res.status(400).json({ error: "Email já cadastrado" });
-    }
-
     const usuario = await repository.criarUsuario(nome, email, senha);
 
     return res.json(usuario);
