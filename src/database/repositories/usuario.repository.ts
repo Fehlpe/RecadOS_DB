@@ -17,4 +17,25 @@ export class UsuarioRepository {
 
     return await manager.save(novoUsuario);
   }
+
+  async verificarEmailExistente(usuarioEmail: string): Promise<boolean> {
+    const manager = pgHelper.client.manager;
+    const usuario = await manager.findOne(UsuarioEntity, {
+      where: { usuarioEmail },
+    });
+    return !!usuario;
+  }
+
+  async getAll(): Promise<UsuarioEntity[]> {
+    const manager = pgHelper.client.manager;
+
+    const usuarios = await manager.find(UsuarioEntity, {
+      order: {
+        usuarioNome: "ASC",
+        usuarioDataCriacao: "DESC",
+      },
+    });
+
+    return usuarios;
+  }
 }
