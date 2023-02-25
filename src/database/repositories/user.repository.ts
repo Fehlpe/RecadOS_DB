@@ -26,6 +26,14 @@ export class UserRepository {
     return !!user;
   }
 
+  async checkExistingUser(userId: string): Promise<boolean> {
+    const manager = pgHelper.client.manager;
+    const user = await manager.findOne(UserEntity, {
+      where: { userId },
+    });
+    return !!user;
+  }
+
   async checkUserLogin(
     userEmail: string,
     userPassword: string

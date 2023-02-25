@@ -25,7 +25,7 @@ export class NoteEntity extends BaseEntity {
 
   @ManyToOne(() => UserEntity)
   @JoinColumn({ name: "user_id" })
-  userId!: UserEntity;
+  userId!: string;
 
   @CreateDateColumn({ name: "created_at" })
   noteCreatedAt!: Date;
