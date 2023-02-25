@@ -9,6 +9,9 @@ export class NoteController {
 
     const note = await repository.createNote(title, description, userId);
 
-    return res.status(200).json(note);
+    return res.status(200).json({
+      success: true,
+      data: note,
+    });
   }
 }

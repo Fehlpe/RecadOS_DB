@@ -9,7 +9,10 @@ export class UserController {
 
     const user = await repository.createUser(username, email, password);
 
-    return res.status(200).json(user);
+    return res.status(200).json({
+      success: true,
+      data: user,
+    });
   }
 
   async login(req: Request, res: Response) {
