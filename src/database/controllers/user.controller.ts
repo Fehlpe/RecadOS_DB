@@ -9,7 +9,7 @@ export class UserController {
 
     const user = await repository.createUser(username, email, password);
 
-    return res.json(user);
+    return res.status(200).json(user);
   }
 
   async login(req: Request, res: Response) {
@@ -19,7 +19,7 @@ export class UserController {
     const user = await repository.checkUserLogin(email, password);
 
     if (!user) {
-      return res.status(401).json({ error: "Incorrect email or password" });
+      return res.status(404).json({ error: "Incorrect email or password" });
     } else {
       return res.status(201).json({
         success: true,

@@ -12,7 +12,7 @@ async function checkExistingEmail(
 
   const exist = await repository.checkExistingEmail(email);
   if (exist) {
-    return res.status(400).json({ error: "Email already registered" });
+    return res.status(409).json({ error: "Email already registered" });
   }
 
   next();
