@@ -19,7 +19,7 @@ export class UserController {
     const user = await repository.checkUserLogin(email, password);
 
     if (!user) {
-      return res.status(401).json({ error: "Incorrect username or password" });
+      return res.status(401).json({ error: "Incorrect email or password" });
     } else {
       return res.status(201).json({
         success: true,

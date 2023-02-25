@@ -5,20 +5,13 @@ export default function checkUserFields(
   res: Response,
   next: NextFunction
 ) {
-  const { username, email, password, password2 } = req.body;
+  const { username, email, password } = req.body;
 
-  if (password !== password2) {
-    return res.status(401).json({
+  if (!username || !email || !password) {
+    return res.status(400).json({
       success: false,
-      message: "Passwords don't match",
+      message: "Required fields not filled",
     });
-  } else {
-    if (!username || !email || !password) {
-      return res.status(400).json({
-        success: false,
-        message: "Required fields not filled",
-      });
-    }
   }
 
   next();
