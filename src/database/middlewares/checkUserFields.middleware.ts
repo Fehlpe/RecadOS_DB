@@ -1,19 +1,19 @@
 import { Request, Response, NextFunction } from "express";
 
-export default function validarCamposUsuario(
+export default function checkUserFields(
   req: Request,
   res: Response,
   next: NextFunction
 ) {
-  const { nome, email, senha, senha2 } = req.body;
+  const { username, email, password, password2 } = req.body;
 
-  if (senha !== senha2) {
+  if (password !== password2) {
     return res.status(401).json({
       success: false,
       message: "Passwords don't match",
     });
   } else {
-    if (!nome || !email || !senha) {
+    if (!username || !email || !password) {
       return res.status(400).json({
         success: false,
         message: "Required fields not filled",

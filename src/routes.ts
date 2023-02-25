@@ -1,17 +1,17 @@
 import { Express } from "express";
-import { UsuarioController } from "./database/controllers/usuario.controller";
-import validarCamposUsuario from "./database/middlewares/validarCamposUsuario.middleware";
-import verificarEmailExistente from "./database/middlewares/validarEmailExistente.middleware";
+import { UserController } from "./database/controllers/user.controller";
+import checkUserFields from "./database/middlewares/checkUserFields.middleware";
+import checkExistingEmail from "./database/middlewares/checkExistingEmail.middleware";
 
 export default (app: Express) => {
   app.get("/", (request, response) => response.send("ESTÁ FUNCIONANDO"));
 
-  const usuarioController = new UsuarioController();
+  const userController = new UserController();
   app.post(
-    "/usuario",
-    verificarEmailExistente,
-    validarCamposUsuario,
-    usuarioController.criar
+    "/users",
+    checkExistingEmail,
+    checkUserFields,
+    userController.create
   );
-  app.get("/usuario", usuarioController.pegarTodos);
+  app.post("/users/login", userController.login);
 };
