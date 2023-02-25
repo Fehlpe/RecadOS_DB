@@ -19,6 +19,6 @@ export default (app: Express) => {
   );
   app.post("/users/login", userController.login);
 
-  const notecontroller = new NoteController();
-  app.post("/users/notes", checkExistingId, notecontroller.create);
+  const noteController = new NoteController();
+  app.post("/users/notes", checkExistingId, noteController.create);
 };
