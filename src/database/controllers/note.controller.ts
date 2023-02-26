@@ -45,4 +45,17 @@ export class NoteController {
       data: note,
     });
   }
+
+  async deleteNote(req: Request, res: Response) {
+    const noteId = req.params.noteId?.toString();
+
+    const repository = new NoteRepository();
+
+    await repository.deleteUserNote(noteId);
+
+    res.status(200).json({
+      success: true,
+      message: "Note deleted successfully!",
+    });
+  }
 }

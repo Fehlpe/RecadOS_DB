@@ -28,4 +28,5 @@ export default (app: Express) => {
     noteController.getUserNotes
   );
   app.put("/users/notes/:noteId", noteController.updateNote);
+  app.delete("/users/notes/:noteId", noteController.deleteNote);
 };

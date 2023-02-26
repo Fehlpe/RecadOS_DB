@@ -41,4 +41,12 @@ export class NoteRepository {
 
     return await manager.save(note);
   }
+
+  async deleteUserNote(noteId: string): Promise<void> {
+    const manager = pgHelper.client.manager;
+
+    await manager.delete(NoteEntity, {
+      noteId,
+    });
+  }
 }
