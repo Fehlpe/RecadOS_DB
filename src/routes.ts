@@ -21,4 +21,5 @@ export default (app: Express) => {
 
   const noteController = new NoteController();
   app.post("/users/notes", checkExistingId, noteController.create);
+  app.get("/users/notes", checkExistingId, noteController.getUserNotes);
 };

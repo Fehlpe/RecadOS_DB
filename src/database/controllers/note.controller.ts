@@ -14,4 +14,17 @@ export class NoteController {
       data: note,
     });
   }
+
+  async getUserNotes(req: Request, res: Response) {
+    const userId = req.query.userId?.toString();
+
+    const repository = new NoteRepository();
+
+    const notes = await repository.getAllUserNotes(userId!);
+
+    return res.status(200).json({
+      success: true,
+      data: notes,
+    });
+  }
 }

@@ -17,4 +17,9 @@ export class NoteRepository {
 
     return await manager.save(newNote);
   }
+
+  async getAllUserNotes(userId: string): Promise<NoteEntity[]> {
+    const manager = pgHelper.client.manager;
+    return await manager.find(NoteEntity, { where: { userId } });
+  }
 }
