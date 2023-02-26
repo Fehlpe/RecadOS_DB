@@ -27,4 +27,22 @@ export class NoteController {
       data: notes,
     });
   }
+
+  async updateNote(req: Request, res: Response) {
+    const noteId = req.params.noteId?.toString();
+    const { noteTitle, noteDescription } = req.body;
+
+    const repository = new NoteRepository();
+
+    const note = await repository.updateUserNote(
+      noteId,
+      noteTitle,
+      noteDescription
+    );
+
+    res.status(200).json({
+      success: true,
+      data: note,
+    });
+  }
 }

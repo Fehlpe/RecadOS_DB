@@ -22,4 +22,23 @@ export class NoteRepository {
     const manager = pgHelper.client.manager;
     return await manager.find(NoteEntity, { where: { userId } });
   }
+
+  async updateUserNote(
+    noteId: string,
+    noteTitle: string,
+    noteDescription: string
+  ): Promise<NoteEntity | undefined> {
+    const manager = pgHelper.client.manager;
+
+    const note = await manager.findOne(NoteEntity, { where: { noteId } });
+
+    if (!note) {
+      return undefined;
+    }
+
+    note.noteTitle = noteTitle;
+    note.noteDescription = noteDescription;
+
+    return await manager.save(note);
+  }
 }
