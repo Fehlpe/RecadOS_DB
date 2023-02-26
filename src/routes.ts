@@ -29,4 +29,7 @@ export default (app: Express) => {
   );
   app.put("/users/notes/:noteId", noteController.updateNote);
   app.delete("/users/notes/:noteId", noteController.deleteNote);
+  app.put("/:userId/notes/:noteId/archive", noteController.archiveNote);
+  app.put("/:userId/notes/:noteId/unarchive", noteController.unarchiveNote);
+  app.get("/:userId/notes/search", noteController.searchNote);
 };

@@ -1,3 +1,4 @@
+import { ILike } from "typeorm";
 import { NoteEntity } from "../entities/notes.entity";
 import { pgHelper } from "../pg-helper";
 
@@ -48,5 +49,41 @@ export class NoteRepository {
     await manager.delete(NoteEntity, {
       noteId,
     });
+  }
+
+  async archiveUserNote(noteId: string): Promise<void> {
+    const manager = pgHelper.client.manager;
+
+    const note = await manager.findOne(NoteEntity, { where: { noteId } });
+
+    if (!note) {
+      return undefined;
+    }
+
+    note.noteArchived = true;
+
+    await manager.save(note);
+  }
+
+  async unarchiveUserNote(noteId: string): Promise<void> {
+    const manager = pgHelper.client.manager;
+
+    const note = await manager.findOne(NoteEntity, { where: { noteId } });
+
+    if (!note) {
+      return undefined;
+    }
+
+    note.noteArchived = false;
+
+    await manager.save(note);
+  }
+
+  async searchUserNotes(userId: string, query?: string): Promise<NoteEntity[]> {
+    const manager = pgHelper.client.manager;
+    const where = query
+      ? { userId, noteTitle: ILike(`%${query}%`) }
+      : { userId };
+    return await manager.find(NoteEntity, { where });
   }
 }

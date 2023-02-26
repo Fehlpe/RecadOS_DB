@@ -23,6 +23,9 @@ export class NoteEntity extends BaseEntity {
   @Column({ name: "description" })
   noteDescription!: string;
 
+  @Column({ name: "archived" })
+  noteArchived!: boolean;
+
   @ManyToOne(() => UserEntity)
   @JoinColumn({ name: "user_id" })
   userId!: string;
@@ -35,6 +38,7 @@ export class NoteEntity extends BaseEntity {
 
   @BeforeInsert()
   beforeInsert() {
+    this.noteArchived = false;
     this.noteId = new Date().getTime().toString();
     this.noteCreatedAt = new Date();
   }

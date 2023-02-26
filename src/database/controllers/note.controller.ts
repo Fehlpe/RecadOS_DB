@@ -58,4 +58,63 @@ export class NoteController {
       message: "Note deleted successfully!",
     });
   }
+
+  async archiveNote(req: Request, res: Response) {
+    const noteId = req.params.noteId?.toString();
+    const userId = req.params.userId?.toString();
+
+    const repository = new NoteRepository();
+
+    await repository.archiveUserNote(noteId);
+
+    const notes = await repository.getAllUserNotes(userId!);
+
+    res.status(200).json({
+      success: true,
+      message: "Note archived successfully!",
+      data: notes,
+    });
+  }
+
+  async unarchiveNote(req: Request, res: Response) {
+    const noteId = req.params.noteId?.toString();
+    const userId = req.params.userId?.toString();
+
+    const repository = new NoteRepository();
+
+    await repository.unarchiveUserNote(noteId);
+
+    const notes = await repository.getAllUserNotes(userId!);
+
+    res.status(200).json({
+      success: true,
+      message: "Note archived successfully!",
+      data: notes,
+    });
+  }
+
+  async searchNote(req: Request, res: Response) {
+    const userId = req.params.userId?.toString();
+    const { query } = req.query;
+
+    const repository = new NoteRepository();
+
+    const searchResults = await repository.searchUserNotes(
+      userId,
+      query as string
+    );
+
+    if (searchResults.length === 0) {
+      const notes = await repository.getAllUserNotes(userId!);
+      return res.status(201).json({
+        success: true,
+        data: notes,
+      });
+    } else {
+      return res.status(200).json({
+        success: true,
+        data: searchResults,
+      });
+    }
+  }
 }
