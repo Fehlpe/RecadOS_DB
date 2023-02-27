@@ -26,6 +26,7 @@ export class UserController {
     } else {
       return res.status(201).json({
         success: true,
+        data: user,
       });
     }
   }
