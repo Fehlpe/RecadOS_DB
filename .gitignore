@@ -1,5 +1,4 @@
 node_modules
-dist/
 *-lock.json
 yarn.lock
 .env
