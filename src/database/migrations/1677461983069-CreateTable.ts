@@ -36,7 +36,7 @@ export class CreateTable1677461983069 implements MigrationInterface {
             type: "varchar",
             length: "50",
             isNullable: false,
-            isUnique: true,
+            isUnique: false,
           },
           {
             name: "created_at",

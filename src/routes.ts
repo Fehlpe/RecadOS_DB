@@ -21,7 +21,7 @@ export default (app: Express) => {
   app.post("/users/login", userController.login);
 
   const noteController = new NoteController();
-  app.post("/users/notes", checkExistingId, noteController.create);
+  app.post("/users/notes", noteController.create);
   app.get(
     "/users/notes",
     checkExistingIdWithQuery,
